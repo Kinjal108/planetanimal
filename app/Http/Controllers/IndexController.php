@@ -336,6 +336,28 @@ class IndexController extends Controller
         
     }
     
+    // Show login page
+    public function show()
+    {
+        return view('login2'); // Blade view
+    }
+
+    // Handle form submission
+    public function submit(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        // Dummy check (replace with real auth logic)
+        if($request->email === 'kinjal.webdevlp@gmail.com' && $request->password === '12345678'){
+            session(['user_email' => $request->email]);
+            return redirect('/')->with('success', 'Logged in!');
+        }
+
+        return back()->withErrors(['Invalid credentials']);
+    }
      /**
      * Send the response after the user was authenticated.
      *

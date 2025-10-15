@@ -56,7 +56,7 @@ function verifyCaptcha() {
           <div class="col-12 col-lg-12 col-xl-12 mx-auto">
             <h2 class="form-title-item mb-4">{{trans('words.login_text')}}</h2>
              {!! Form::open(array('url' => 'login','class'=>'','id'=>'loginform','role'=>'form','onsubmit'=>'return submitForm();')) !!}  
-
+              @csrf
              
 
             <div class="form-group">

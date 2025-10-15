@@ -1,6 +1,7 @@
     <?php
 
     use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
     use App\Http\Controllers\Auth\GoogleController;
     use App\Http\Controllers\Auth\FacebookController;
@@ -60,20 +61,36 @@
     use App\Http\Controllers\Admin\ImportImdbController as AdminImportImdbController;
     use App\Http\Controllers\Admin\ImportImdbShowController as AdminImportImdbShowController;
 
+    // Route::get('/test-session', function() {
+    //     session(['test_key' => 'hello']);
+    //     return session('test_key');
+    // });
+    Route::middleware('web')->get('/debug-session', function () {
+        session(['test' => 'working']);
+        return [
+            'session_value' => session('test'),
+            'session_id' => session()->getId(),
+            'all_session' => session()->all(),
+            'cookies' => request()->cookies->all(),
+        ];
+    });
+    Route::get('/test-session', function () {
+        session(['test' => 'working']);
+        return response()->json(['session' => session('test')]);
+    });
+    Route::get('/debug-csrf', function (Request $request) {
+        return [
+            'session_token' => session()->token(),
+            'cookie_xsrf_token' => $request->cookie('XSRF-TOKEN'),
+            'form_token_example' => '<input name="_token" value="'.csrf_token().'">',
+            'cookies_header' => $request->header('cookie'),
+            'session_id' => session()->getId(),
+        ];
+    });
 
     // Route::get('/', function () {
     //     return view('welcome');
     // });
-
-    Route::get('/test-cookie', function () {
-        $minutes = 10;
-        Cookie::queue('test_cookie', 'working_cookie', $minutes);
-        return response()->json(['message' => 'Cookie set']);
-    });
-
-    Route::get('/get-cookie', function () {
-        return response()->json(['cookie_value' => request()->cookie('test_cookie')]);
-    });
     Route::prefix('admin')->group(function () {
 
         Route::get('/', [AdminIndexController::class, 'index']);
@@ -353,11 +370,6 @@
     Route::get('login', [IndexController::class, 'login']);
     Route::post('login', [IndexController::class, 'postLogin']);
    
-Route::get('login2', [IndexController::class, 'show']);
-Route::post('login2', [IndexController::class, 'submit']);
-Route::get('dashboard', function() {
-    return session('user_email') ? "Welcome ".session('user_email') : redirect('login2');
-});
     // Google Login
     Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
     Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);

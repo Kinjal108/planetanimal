@@ -135,6 +135,7 @@ class SportsController extends Controller
 
     public function sports_details($slug,$id)
     {
+        // dd('test');
         if(Auth::check())
         {             
             if(Auth::user()->usertype!="Admin" AND Auth::user()->usertype!="Sub_Admin")  
@@ -147,7 +148,7 @@ class SportsController extends Controller
         }
 
         $sports_info = Sports::where('id',$id)->first();
-
+        
         $related_sports_list = Sports::where('status',1)->where('id','!=',$id)->where('sports_cat_id',$sports_info->sports_cat_id)->orderBy('id','DESC')->get();
 
         return view('pages.sports.details',compact('sports_info','related_sports_list')); 
