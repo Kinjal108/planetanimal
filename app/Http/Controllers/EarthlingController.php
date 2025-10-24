@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\User;
-use App\Models\Sports;
-use App\Models\SportsCategory;
+use App\Models\Earthling;
+use App\Models\Earthling_category;
 use App\Models\RecentlyWatched;
 use App\Models\Slider;
 
@@ -18,10 +18,10 @@ use Intervention\Image\Facades\Image;
 
 use Session;
 
-class SportsController extends Controller
+class EarthlingController extends Controller
 {
 	  
-    public function sports()
+    public function earthling()
     {   
         if(Auth::check())
         {             
@@ -42,7 +42,7 @@ class SportsController extends Controller
         {   
             $sports_cat_id = $_GET['cat_id'];
 
-            $sports_video_list = Sports::where('status',1)->where('sports_cat_id',$sports_cat_id)->orderBy('id','DESC')->paginate($pagination_limit);
+            $sports_video_list = Earthling::where('status',1)->where('sports_cat_id',$sports_cat_id)->orderBy('id','DESC')->paginate($pagination_limit);
             $sports_video_list->appends(\Request::only('cat_id'))->links();
         }
         else if(isset($_GET['filter']))
@@ -51,36 +51,36 @@ class SportsController extends Controller
 
             if($keyword=='old')
             {
-                $sports_video_list = Sports::where('status',1)->orderBy('id','ASC')->paginate($pagination_limit);
+                $sports_video_list = Earthling::where('status',1)->orderBy('id','ASC')->paginate($pagination_limit);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             else if($keyword=='alpha')
             {
-                $sports_video_list = Sports::where('status',1)->orderBy('video_title','ASC')->paginate($pagination_limit);
+                $sports_video_list = Earthling::where('status',1)->orderBy('video_title','ASC')->paginate($pagination_limit);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             else if($keyword=='rand')
             {
-                $sports_video_list = Sports::where('status',1)->inRandomOrder()->paginate($pagination_limit);
+                $sports_video_list = Earthling::where('status',1)->inRandomOrder()->paginate($pagination_limit);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             else
             {
-                $sports_video_list = Sports::where('status',1)->orderBy('id','DESC')->paginate($pagination_limit);
+                $sports_video_list = Earthling::where('status',1)->orderBy('id','DESC')->paginate($pagination_limit);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             
         }
         else
         {	   
-            $sports_video_list = Sports::where('status',1)->orderBy('id','DESC')->paginate($pagination_limit);
+            $sports_video_list = Earthling::where('status',1)->orderBy('id','DESC')->paginate($pagination_limit);
 
         }        
-       return view('pages.sports.list',compact('slider','sports_video_list'));
+       return view('pages.earthling.list',compact('slider','sports_video_list'));
          
     }
 
-    public function sports_by_category($slug)
+    public function earthling_by_category($slug)
     {  
 
         if(Auth::check())
@@ -94,7 +94,7 @@ class SportsController extends Controller
            }
         }
 
-       $sports_cat_info = SportsCategory::where('category_slug',$slug)->first();       
+       $sports_cat_info = Earthling_category::where('category_slug',$slug)->first();       
        
        $cat_id=$sports_cat_info->id;       
 
@@ -104,22 +104,22 @@ class SportsController extends Controller
 
             if($keyword=='old')
             {
-                $sports_video_list = Sports::where('status',1)->where('sports_cat_id',$cat_id)->orderBy('id','ASC')->paginate($pagination_limit);
+                $sports_video_list = Earthling::where('status',1)->where('sports_cat_id',$cat_id)->orderBy('id','ASC')->paginate($pagination_limit);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             else if($keyword=='alpha')
             {
-                $sports_video_list = Sports::where('status',1)->where('sports_cat_id',$cat_id)->orderBy('video_title','ASC')->paginate($pagination_limit);
+                $sports_video_list = Earthling::where('status',1)->where('sports_cat_id',$cat_id)->orderBy('video_title','ASC')->paginate($pagination_limit);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             else if($keyword=='rand')
             {
-                $sports_video_list = Sports::where('status',1)->where('sports_cat_id',$cat_id)->inRandomOrder()->paginate($pagination_limit);
+                $sports_video_list = Earthling::where('status',1)->where('sports_cat_id',$cat_id)->inRandomOrder()->paginate($pagination_limit);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             else
             {
-                $sports_video_list = Sports::where('status',1)->where('sports_cat_id',$cat_id)->orderBy('id','DESC')->paginate($pagination_limit);
+                $sports_video_list = Earthling::where('status',1)->where('sports_cat_id',$cat_id)->orderBy('id','DESC')->paginate($pagination_limit);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             
@@ -127,13 +127,13 @@ class SportsController extends Controller
         else
         {
 
-             $sports_video_list = Sports::where('status',1)->where('sports_cat_id',$cat_id)->orderBy('id','DESC')->paginate($pagination_limit);  
+             $sports_video_list = Earthling::where('status',1)->where('sports_cat_id',$cat_id)->orderBy('id','DESC')->paginate($pagination_limit);  
         }      
        return view('pages.sports_by_category',compact('sports_video_list','sports_cat_info'));
          
     }
 
-    public function sports_details($slug,$id)
+    public function earthling_details($slug,$id)
     {
         // dd('test');
         if(Auth::check())
@@ -147,14 +147,14 @@ class SportsController extends Controller
            }
         }
 
-        $sports_info = Sports::where('id',$id)->first();
+        $sports_info = Earthling::where('id',$id)->first();
         
-        $related_sports_list = Sports::where('status',1)->where('id','!=',$id)->where('sports_cat_id',$sports_info->sports_cat_id)->orderBy('id','DESC')->get();
+        $related_sports_list = Earthling::where('status',1)->where('id','!=',$id)->where('sports_cat_id',$sports_info->sports_cat_id)->orderBy('id','DESC')->get();
 
-        return view('pages.sports.details',compact('sports_info','related_sports_list')); 
+        return view('pages.earthling.details',compact('sports_info','related_sports_list')); 
     }
 
-    public function sports_watch($slug,$id)
+    public function earthling_watch($slug,$id)
     {   
         if(Auth::check())
         {             
@@ -167,7 +167,7 @@ class SportsController extends Controller
            }
         }
     	   
-        $sports_info = Sports::where('id',$id)->first();
+        $sports_info = Earthling::where('id',$id)->first();
 
         //Check user plan
         if($sports_info->video_access=="Paid")
@@ -197,7 +197,7 @@ class SportsController extends Controller
         }
 
          
-        $related_sports_list = Sports::where('status',1)->where('id','!=',$id)->where('sports_cat_id',$sports_info->sports_cat_id)->orderBy('id','DESC')->take(10)->get();
+        $related_sports_list = Earthling::where('status',1)->where('id','!=',$id)->where('sports_cat_id',$sports_info->sports_cat_id)->orderBy('id','DESC')->take(10)->get();
  
         //Recently Watched
         if(Auth::check())
@@ -240,15 +240,12 @@ class SportsController extends Controller
 
         //View Update
         $v_id=$sports_info->id;
-        $video_obj = Sports::findOrFail($v_id);        
+        $video_obj = Earthling::findOrFail($v_id);        
         $video_obj->increment('views');     
         $video_obj->save();
 
 
-        return view('pages.sports.watch',compact('sports_info','related_sports_list')); 
+        return view('pages.earthling.watch',compact('sports_info','related_sports_list')); 
     }
 
-
-     
-    
 }

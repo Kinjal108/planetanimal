@@ -32,9 +32,9 @@
                     @endif
 
                     @if(getcong('menu_sports'))
-                    <li><a href="{{ URL::to('earthling') }}" class="{{classActivePathSite('sports')}}" title="Animal Groups">Animal Groups</a> <span class="arrow"></span>
+                    <li><a href="{{ URL::to('earthling') }}" class="{{classActivePathSite('earthling')}}" title="Animal Groups">Animal Groups</a> <span class="arrow"></span>
                       <ul class="dm-align-2 mega-list">
-                        @foreach(\App\Models\SportsCategory::where('status','1')->orderBy('category_name')->get() as $sports_cat)
+                        @foreach(\App\Models\Earthling_category::where('status','1')->orderBy('category_name')->get() as $sports_cat)
                         <li><a href="{{ URL::to('earthling/?cat_id='.$sports_cat->id) }}" title="{{$sports_cat->category_name}}">{{$sports_cat->category_name}}</a></li>
                         @endforeach     
                       </ul>

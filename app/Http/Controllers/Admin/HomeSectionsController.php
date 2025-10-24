@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\HomeSections;
 use App\Models\Movies;
 use App\Models\Series;
-use App\Models\Sports;
+use App\Models\Earthling;
 use App\Models\LiveTV;
 
 use App\Http\Requests;
@@ -58,7 +58,7 @@ class HomeSectionsController extends MainAdminController
 
         $movies_list = Movies::orderBy('id','DESC')->get();
         $series_list = Series::orderBy('id','DESC')->get();
-        $sports_list = Sports::orderBy('id','DESC')->get();
+        $sports_list = Earthling::orderBy('id','DESC')->get();
         $livetv_list = LiveTV::orderBy('id','DESC')->get();
 
         return view('admin.pages.home_sections.addedit',compact('page_title','movies_list','series_list','sports_list','livetv_list'));
@@ -172,7 +172,7 @@ class HomeSectionsController extends MainAdminController
 
           $movies_list = Movies::orderBy('id','DESC')->get();
           $series_list = Series::orderBy('id','DESC')->get();
-          $sports_list = Sports::orderBy('id','DESC')->get();
+          $sports_list = Earthling::orderBy('id','DESC')->get();
           $livetv_list = LiveTV::orderBy('id','DESC')->get(); 
 
           return view('admin.pages.home_sections.addedit',compact('page_title','data_obj','movies_list','series_list','sports_list','livetv_list'));

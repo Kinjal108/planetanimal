@@ -5,7 +5,7 @@ use App\Models\Pages;
 use App\Models\Transactions;
 use App\Models\Episodes;
 use App\Models\Movies;
-use App\Models\Sports;
+use App\Models\Earthling;
 use App\Models\RecentlyWatched; 
 use App\Models\User;
 use App\Models\Ads;
@@ -331,7 +331,7 @@ if (! function_exists('recently_watched_info')) {
         } 
         else if($video_type=="Sports")
         {
-            $recently_info = Sports::where('id',$video_id)->first();
+            $recently_info = Earthling::where('id',$video_id)->first();
         }
         else if($video_type=="LiveTV")
         {

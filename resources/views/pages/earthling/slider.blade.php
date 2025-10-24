@@ -21,7 +21,7 @@
          
         @elseif($slider_data->slider_type=="Sports")
 
-        <?php $slider_url= URL::to('earthling/details/'.App\Models\Sports::getSportsInfo($slider_data->slider_post_id,'video_slug').'/'.$slider_data->slider_post_id);?>
+        <?php $slider_url= URL::to('earthling/details/'.App\Models\Earthling::getSportsInfo($slider_data->slider_post_id,'video_slug').'/'.$slider_data->slider_post_id);?>
         
         @elseif($slider_data->slider_type=="LiveTV")
 

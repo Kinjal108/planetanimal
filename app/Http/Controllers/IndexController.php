@@ -8,7 +8,7 @@ use App\Models\Slider;
 use App\Models\Series;
 use App\Models\Movies;
 use App\Models\HomeSections;
-use App\Models\Sports;
+use App\Models\Earthling;
 use App\Models\Pages;
 use App\Models\RecentlyWatched;
 use App\Models\LiveTV;
@@ -161,7 +161,7 @@ class IndexController extends Controller
         
         if(getcong('menu_sports'))
         {
-            $s_sports_list = Sports::where('status',1)->where("video_title", "LIKE","%$keyword%")->orderBy('video_title')->get();
+            $s_sports_list = Earthling::where('status',1)->where("video_title", "LIKE","%$keyword%")->orderBy('video_title')->get();
         }
         else
         {
@@ -190,7 +190,7 @@ class IndexController extends Controller
 
         $series_list = Series::where('status',1)->where('upcoming',0)->where("series_name", "LIKE","%$keyword%")->orderBy('series_name')->get();
 
-        $sports_video_list = Sports::where('status',1)->where("video_title", "LIKE","%$keyword%")->orderBy('video_title')->get();
+        $sports_video_list = Earthling::where('status',1)->where("video_title", "LIKE","%$keyword%")->orderBy('video_title')->get();
 
         $live_tv_list = LiveTV::where('status',1)->where("channel_name", "LIKE","%$keyword%")->orderBy('channel_name')->get();
     
@@ -226,7 +226,7 @@ class IndexController extends Controller
 
     public function sitemap_sports()
     {   
-        $sports_video_list = Sports::where('status',1)->orderBy('id','DESC')->get();
+        $sports_video_list = Earthling::where('status',1)->orderBy('id','DESC')->get();
 
         return response()->view('pages.sitemap_sports',compact('sports_video_list'))->header('Content-Type', 'text/xml');
     }

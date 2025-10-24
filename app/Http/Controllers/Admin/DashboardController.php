@@ -8,7 +8,7 @@ use App\Models\Language;
 use App\Models\Genres;
 use App\Models\Movies;
 use App\Models\Series;
-use App\Models\Sports;
+use App\Models\Earthling;
 use App\Models\LiveTV;
 use App\Models\SubscriptionPlan;
 use App\Models\Transactions;
@@ -45,7 +45,7 @@ class DashboardController extends MainAdminController
             $genres = Genres::count();
             $movies = Movies::count();
             $series = Series::count();
-            $sports = Sports::count();
+            $sports = Earthling::count();
             $livetv = LiveTV::count();
             $users = User::where('usertype','User')->count(); 
             $plan = SubscriptionPlan::count();

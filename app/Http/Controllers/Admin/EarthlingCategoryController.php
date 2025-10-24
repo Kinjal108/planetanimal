@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Auth;
 use App\Models\User;
-use App\Models\SportsCategory;
+use App\Models\Earthling_category;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ use Session;
 use Intervention\Image\Facades\Image; 
 use Illuminate\Support\Str;
 
-class SportsCategoryController extends MainAdminController
+class EarthlingCategoryController extends MainAdminController
 {
 	public function __construct()
     {
@@ -35,9 +35,9 @@ class SportsCategoryController extends MainAdminController
 
         $page_title=trans('words.earthling_cat_text');
               
-        $category_list = SportsCategory::orderBy('category_name')->paginate(10);
+        $category_list = Earthling_category::orderBy('category_name')->paginate(10);
          
-        return view('admin.pages.sports_category.list',compact('page_title','category_list'));
+        return view('admin.pages.earthling_category.list',compact('page_title','category_list'));
     }
     
     public function addCategory()    { 
@@ -53,7 +53,7 @@ class SportsCategoryController extends MainAdminController
 
         $page_title=trans('words.add_category');
 
-        return view('admin.pages.sports_category.addedit',compact('page_title'));
+        return view('admin.pages.earthling_category.addedit',compact('page_title'));
     }
     
     public function addnew(Request $request)
@@ -75,11 +75,11 @@ class SportsCategoryController extends MainAdminController
         
         if(!empty($inputs['id'])){
            
-            $cat_obj = SportsCategory::findOrFail($inputs['id']);
+            $cat_obj = Earthling_category::findOrFail($inputs['id']);
 
         }else{
 
-            $cat_obj = new SportsCategory;
+            $cat_obj = new Earthling_category;
 
         }
 
@@ -122,9 +122,9 @@ class SportsCategoryController extends MainAdminController
 
           $page_title=trans('words.edit_category');
 
-          $cat_info = SportsCategory::findOrFail($cat_id);   
+          $cat_info = Earthling_category::findOrFail($cat_id);   
 
-          return view('admin.pages.sports_category.addedit',compact('page_title','cat_info'));
+          return view('admin.pages.earthling_category.addedit',compact('page_title','cat_info'));
         
     }	 
     
@@ -133,7 +133,7 @@ class SportsCategoryController extends MainAdminController
     	if(Auth::User()->usertype=="Admin" OR Auth::User()->usertype=="Sub_Admin")
         {
         	
-        $cat_obj = SportsCategory::findOrFail($cat_id);
+        $cat_obj = Earthling_category::findOrFail($cat_id);
         $cat_obj->delete();
 
         \Session::flash('flash_message', trans('words.deleted'));

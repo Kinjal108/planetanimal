@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Slider; 
 use App\Models\Movies;
 use App\Models\Series;
-use App\Models\Sports;
+use App\Models\Earthling;
 use App\Models\LiveTV;
 
 
@@ -62,7 +62,7 @@ class SliderController extends MainAdminController
 
         $movies_list = Movies::orderBy('id','DESC')->get();
         $series_list = Series::orderBy('id','DESC')->get();
-        $sports_list = Sports::orderBy('id','DESC')->get();
+        $sports_list = Earthling::orderBy('id','DESC')->get();
         $live_tv_list = LiveTV::orderBy('id','DESC')->get();
  
         return view('admin.pages.slider.addedit',compact('page_title','movies_list','series_list','sports_list','live_tv_list'));
@@ -182,7 +182,7 @@ class SliderController extends MainAdminController
 
           $movies_list = Movies::orderBy('id','DESC')->get();
           $series_list = Series::orderBy('id','DESC')->get();
-          $sports_list = Sports::orderBy('id','DESC')->get();
+          $sports_list = Earthling::orderBy('id','DESC')->get();
           $live_tv_list = LiveTV::orderBy('id','DESC')->get();
  
           return view('admin.pages.slider.addedit',compact('page_title','slider_info','movies_list','series_list','sports_list','live_tv_list'));

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SportsCategory extends Model
+class Earthling_category extends Model
 {
-    protected $table = 'sports_category';
+    protected $table = 'earthling_category';
 
     protected $fillable = ['category_name','category_slug'];
 
@@ -17,7 +17,7 @@ class SportsCategory extends Model
 	
 	public static function getSportsCategoryInfo($id,$field_name) 
     { 
-		$cat_info = SportsCategory::where('status','1')->where('id',$id)->first();
+		$cat_info = Earthling_category::where('status','1')->where('id',$id)->first();
 		
 		if($cat_info)
 		{
@@ -28,6 +28,4 @@ class SportsCategory extends Model
 			return  '';
 		}
 	}
-
-	
 }

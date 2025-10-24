@@ -6,7 +6,7 @@
     use App\Http\Controllers\Auth\FacebookController;
 
     use App\Http\Controllers\IndexController;
-    use App\Http\Controllers\SportsController;
+    use App\Http\Controllers\EarthlingController;
     use App\Http\Controllers\UserController;
     use App\Http\Controllers\Auth\ForgotPasswordController;
     use App\Http\Controllers\PagesController;
@@ -36,8 +36,8 @@
     use App\Http\Controllers\Admin\ActionsController as AdminActionsController;
     use App\Http\Controllers\Admin\GenresController as AdminGenresController;
     use App\Http\Controllers\Admin\MoviesController as AdminMoviesController;
-    use App\Http\Controllers\Admin\SportsCategoryController as AdminSportsCategoryController;
-    use App\Http\Controllers\Admin\SportsController as AdminSportsController;
+    use App\Http\Controllers\Admin\EarthlingCategoryController as AdminEarthlingCategoryController;
+    use App\Http\Controllers\Admin\EarthlingController as AdminEarthlingController;
     use App\Http\Controllers\Admin\ActorController as AdminActorController;
     use App\Http\Controllers\Admin\DirectorController as AdminDirectorController;
     use App\Http\Controllers\Admin\SliderController as AdminSliderController;
@@ -108,17 +108,17 @@
         Route::post('movies/add_edit_movie', [AdminMoviesController::class, 'addnew']);
         Route::get('movies/delete/{id}', [AdminMoviesController::class, 'delete']);
 
-        Route::get('earthling_category', [AdminSportsCategoryController::class, 'category_list']);
-        Route::get('earthling_category/add_category', [AdminSportsCategoryController::class, 'addCategory']);
-        Route::get('earthling_category/edit_category/{id}', [AdminSportsCategoryController::class, 'editCategory']);
-        Route::post('earthling_category/add_edit_category', [AdminSportsCategoryController::class, 'addnew']);
-        Route::get('earthling_category/delete/{id}', [AdminSportsCategoryController::class, 'delete']);
+        Route::get('earthling_category', [AdminEarthlingCategoryController::class, 'category_list']);
+        Route::get('earthling_category/add_category', [AdminEarthlingCategoryController::class, 'addCategory']);
+        Route::get('earthling_category/edit_category/{id}', [AdminEarthlingCategoryController::class, 'editCategory']);
+        Route::post('earthling_category/add_edit_category', [AdminEarthlingCategoryController::class, 'addnew']);
+        Route::get('earthling_category/delete/{id}', [AdminEarthlingCategoryController::class, 'delete']);
         
-        Route::get('earthling', [AdminSportsController::class, 'sports_video_list']);
-        Route::get('earthling/add_video', [AdminSportsController::class, 'addVideo']);
-        Route::get('earthling/edit_video/{id}', [AdminSportsController::class, 'editVideo']);
-        Route::post('earthling/add_edit_video', [AdminSportsController::class, 'addnew']);
-        Route::get('earthling/delete/{id}', [AdminSportsController::class, 'delete']);
+        Route::get('earthling', [AdminEarthlingController::class, 'earthling_video_list']);
+        Route::get('earthling/add_video', [AdminEarthlingController::class, 'addVideo']);
+        Route::get('earthling/edit_video/{id}', [AdminEarthlingController::class, 'editVideo']);
+        Route::post('earthling/add_edit_video', [AdminEarthlingController::class, 'addnew']);
+        Route::get('earthling/delete/{id}', [AdminEarthlingController::class, 'delete']);
 
         Route::get('actor', [AdminActorController::class, 'list']);
         Route::get('actor/add', [AdminActorController::class, 'add']);
@@ -334,10 +334,10 @@
 
     if(getcong('menu_sports'))
     {
-        Route::get('earthling', [SportsController::class, 'sports']);
-        Route::get('earthling/{slug}', [SportsController::class, 'sports_by_category']);
-        Route::get('earthling/details/{slug}/{id}', [SportsController::class, 'sports_details']);
-        Route::get('earthling/watch/{slug}/{id}', [SportsController::class, 'sports_watch']);
+        Route::get('earthling', [EarthlingController::class, 'earthling']);
+        Route::get('earthling/{slug}', [EarthlingController::class, 'earthling_by_category']);
+        Route::get('earthling/details/{slug}/{id}', [EarthlingController::class, 'earthling_details']);
+        Route::get('earthling/watch/{slug}/{id}', [EarthlingController::class, 'earthling_watch']);
     }
 
     if(getcong('menu_livetv'))

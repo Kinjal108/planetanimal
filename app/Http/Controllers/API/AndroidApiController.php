@@ -10,13 +10,13 @@ use App\Models\Season;
 use App\Models\Episodes;
 use App\Models\Movies;
 use App\Models\HomeSections;
-use App\Models\Sports;
+use App\Models\Earthling;
 use App\Models\Pages;
 use App\Models\RecentlyWatched;
 use App\Models\Language;
 use App\Models\Genres;
 use App\Models\Settings;
-use App\Models\SportsCategory;
+use App\Models\Earthling_category;
 use App\Models\SubscriptionPlan;
 use App\Models\Transactions;
 use App\Models\SettingsAndroidApp;
@@ -1135,7 +1135,7 @@ class AndroidApiController extends MainAPIController
             }
             else if($slider_data->slider_type=="Sports")
             {
-                $sports_info = Sports::where('status',1)->where('id',$slider_data->slider_post_id)->first();
+                $sports_info = Earthling::where('status',1)->where('id',$slider_data->slider_post_id)->first();
 
                 if(!empty($sports_info))
                 {
@@ -1149,7 +1149,7 @@ class AndroidApiController extends MainAPIController
                     $video_access='';
                 }
                 
-                $lang_cat_name = SportsCategory::getSportsCategoryInfo($lang_cat_id,'category_name');
+                $lang_cat_name = Earthling_category::getSportsCategoryInfo($lang_cat_id,'category_name');
 
             }
             else if($slider_data->slider_type=="LiveTV")
@@ -1423,7 +1423,7 @@ class AndroidApiController extends MainAPIController
             {
                 foreach(explode(",",$sections_data->sport_ids) as $sport_data)
                 {
-                    $sports_info = Sports::where('id',$sport_data)->first();
+                    $sports_info = Earthling::where('id',$sport_data)->first();
 
                     if($sports_info->status==1)
                     { 
@@ -1542,7 +1542,7 @@ class AndroidApiController extends MainAPIController
         {
             foreach(explode(",",$home_section->sport_ids) as $sport_data)
             {   
-                $sports_info = Sports::where('id',$sport_data)->first();
+                $sports_info = Earthling::where('id',$sport_data)->first();
 
                 if($sports_info->status==1)
                 { 
@@ -2721,7 +2721,7 @@ class AndroidApiController extends MainAPIController
     {   
         $get_data=checkSignSalt($_POST['data']);
 
-        $cat_list = SportsCategory::where('status',1)->orderby('id')->get();
+        $cat_list = Earthling_category::where('status',1)->orderby('id')->get();
 
         foreach($cat_list as $cat_data)
         {
@@ -2754,32 +2754,32 @@ class AndroidApiController extends MainAPIController
 
             if($keyword=='old')
             {
-                $sports_video_list = Sports::where('status',1)->orderBy('id','ASC')->paginate(12);
+                $sports_video_list = Earthling::where('status',1)->orderBy('id','ASC')->paginate(12);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             else if($keyword=='alpha')
             {
-                $sports_video_list = Sports::where('status',1)->orderBy('video_title','ASC')->paginate(12);
+                $sports_video_list = Earthling::where('status',1)->orderBy('video_title','ASC')->paginate(12);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             else if($keyword=='rand')
             {
-                $sports_video_list = Sports::where('status',1)->inRandomOrder()->paginate(12);
+                $sports_video_list = Earthling::where('status',1)->inRandomOrder()->paginate(12);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             else
             {
-                $sports_video_list = Sports::where('status',1)->orderBy('id','DESC')->paginate(12);
+                $sports_video_list = Earthling::where('status',1)->orderBy('id','DESC')->paginate(12);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             
         }
         else
         {
-            $sports_video_list = Sports::where('status',1)->orderBy('id','DESC')->paginate(12);
+            $sports_video_list = Earthling::where('status',1)->orderBy('id','DESC')->paginate(12);
         }
 
-      $total_records=Sports::where('status','1')->count();
+      $total_records=Earthling::where('status','1')->count();
 
       if($sports_video_list->count()) 
        {
@@ -2820,32 +2820,32 @@ class AndroidApiController extends MainAPIController
 
             if($keyword=='old')
             {
-                $sports_video_list = Sports::where('status',1)->where('sports_cat_id',$sports_cat_id)->orderBy('id','ASC')->paginate(12);
+                $sports_video_list = Earthling::where('status',1)->where('sports_cat_id',$sports_cat_id)->orderBy('id','ASC')->paginate(12);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             else if($keyword=='alpha')
             {
-                $sports_video_list = Sports::where('status',1)->where('sports_cat_id',$sports_cat_id)->orderBy('video_title','ASC')->paginate(12);
+                $sports_video_list = Earthling::where('status',1)->where('sports_cat_id',$sports_cat_id)->orderBy('video_title','ASC')->paginate(12);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             else if($keyword=='rand')
             {
-                $sports_video_list = Sports::where('status',1)->where('sports_cat_id',$sports_cat_id)->inRandomOrder()->paginate(12);
+                $sports_video_list = Earthling::where('status',1)->where('sports_cat_id',$sports_cat_id)->inRandomOrder()->paginate(12);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             else
             {
-                $sports_video_list = Sports::where('status',1)->where('sports_cat_id',$sports_cat_id)->orderBy('id','DESC')->paginate(12);
+                $sports_video_list = Earthling::where('status',1)->where('sports_cat_id',$sports_cat_id)->orderBy('id','DESC')->paginate(12);
                 $sports_video_list->appends(\Request::only('filter'))->links();
             }
             
         }
         else
         {
-            $sports_video_list = Sports::where('status',1)->where('sports_cat_id',$sports_cat_id)->orderBy('id','DESC')->paginate(12);
+            $sports_video_list = Earthling::where('status',1)->where('sports_cat_id',$sports_cat_id)->orderBy('id','DESC')->paginate(12);
         }
 
-      $total_records=Sports::where('status','1')->where('sports_cat_id',$sports_cat_id)->count();
+      $total_records=Earthling::where('status','1')->where('sports_cat_id',$sports_cat_id)->count();
 
       if($sports_video_list->count()) 
        {
@@ -2890,7 +2890,7 @@ class AndroidApiController extends MainAPIController
         }
 
         $sport_id=$get_data['sport_id'];
-        $sports_info = Sports::where('id',$sport_id)->first();  
+        $sports_info = Earthling::where('id',$sport_id)->first();  
         
         $sports_slug=$sports_info->video_slug;
 
@@ -2933,7 +2933,7 @@ class AndroidApiController extends MainAPIController
         $sport_cat_id= $sports_info->sports_cat_id;
           
 
-        $category_name= SportsCategory::getSportsCategoryInfo($sport_cat_id,'category_name');
+        $category_name= Earthling_category::getSportsCategoryInfo($sport_cat_id,'category_name');
 
         $video_quality= $sports_info->video_quality?'true':'false';
         $subtitle_on_off= $sports_info->subtitle_on_off?'true':'false';
@@ -2962,7 +2962,7 @@ class AndroidApiController extends MainAPIController
 
          
         //Related Movies List
-        $related_sports_list = Sports::where('status',1)->where('id','!=',$sport_id)->where('sports_cat_id',$sport_cat_id)->orderBy('id','DESC')->get();
+        $related_sports_list = Earthling::where('status',1)->where('id','!=',$sport_id)->where('sports_cat_id',$sport_cat_id)->orderBy('id','DESC')->get();
 
         if($related_sports_list->count()) 
            { 
@@ -3023,7 +3023,7 @@ class AndroidApiController extends MainAPIController
 
         //View Update
         $v_id=$sports_info->id;
-        $video_obj = Sports::findOrFail($v_id);        
+        $video_obj = Earthling::findOrFail($v_id);        
         $video_obj->increment('views');     
         $video_obj->save();
 
@@ -3393,7 +3393,7 @@ class AndroidApiController extends MainAPIController
         //Show End
 
         //Sports Start   
-        $sports_video_list = Sports::where('status',1)->where("video_title", "LIKE","%$keyword%")->orderBy('video_title')->get();
+        $sports_video_list = Earthling::where('status',1)->where("video_title", "LIKE","%$keyword%")->orderBy('video_title')->get();
 
           if($sports_video_list->count()) 
            {    
@@ -3543,7 +3543,7 @@ class AndroidApiController extends MainAPIController
                         {
                             $post_id= $watchlist_data->post_id;
 
-                            $sports_info = Sports::where('id',$post_id)->first();
+                            $sports_info = Earthling::where('id',$post_id)->first();
 
                             $post_title= stripslashes($sports_info->video_title);
 
@@ -4980,7 +4980,7 @@ class AndroidApiController extends MainAPIController
                 $response['genre'][]=array("genre_id"=>$genre_id,"genre_name"=>$genre_name);   
         }  
 
-        $sports_cat_list = SportsCategory::where('status',1)->orderby('id')->get();
+        $sports_cat_list = Earthling_category::where('status',1)->orderby('id')->get();
 
         foreach($sports_cat_list as $sport_cat_data)
         {
@@ -5245,7 +5245,7 @@ class AndroidApiController extends MainAPIController
         {
             $cat_ids = $filter_cat_id?json_decode("[$filter_cat_id]", true):''; 
   
-            $sports_video_list = Sports::where('status',1)->when($cat_ids, function ($q) use ($cat_ids) {
+            $sports_video_list = Earthling::where('status',1)->when($cat_ids, function ($q) use ($cat_ids) {
                 return $q->whereIn('sports_cat_id',$cat_ids);
             })->orderby('id','ASC')->paginate(12);
 
@@ -5255,7 +5255,7 @@ class AndroidApiController extends MainAPIController
         {
             $cat_ids = $filter_cat_id?json_decode("[$filter_cat_id]", true):''; 
   
-            $sports_video_list = Sports::where('status',1)->when($cat_ids, function ($q) use ($cat_ids) {
+            $sports_video_list = Earthling::where('status',1)->when($cat_ids, function ($q) use ($cat_ids) {
                 return $q->whereIn('sports_cat_id',$cat_ids);
             })->orderby('video_title','ASC')->paginate(12);
         }
@@ -5263,7 +5263,7 @@ class AndroidApiController extends MainAPIController
         {   
             $cat_ids = $filter_cat_id?json_decode("[$filter_cat_id]", true):''; 
   
-            $sports_video_list = Sports::where('status',1)->when($cat_ids, function ($q) use ($cat_ids) {
+            $sports_video_list = Earthling::where('status',1)->when($cat_ids, function ($q) use ($cat_ids) {
                 return $q->whereIn('sports_cat_id',$cat_ids);
             })->inRandomOrder()->paginate(12);
 
@@ -5272,7 +5272,7 @@ class AndroidApiController extends MainAPIController
         {
             $cat_ids = $filter_cat_id?json_decode("[$filter_cat_id]", true):''; 
   
-            $sports_video_list = Sports::where('status',1)->when($cat_ids, function ($q) use ($cat_ids) {
+            $sports_video_list = Earthling::where('status',1)->when($cat_ids, function ($q) use ($cat_ids) {
                 return $q->whereIn('sports_cat_id',$cat_ids);
             })->orderby('id','DESC')->paginate(12);
         

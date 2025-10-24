@@ -28,7 +28,7 @@
               <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-futbol-o"></i><span>Animal Groups</span><span class="menu-arrow"></span></a>
               <ul class="list-unstyled">                 
                 <li class="{{classActivePath('earthling_category')}}"><a href="{{ URL::to('admin/earthling_category') }}" class="{{classActivePath('earthling_category')}}"><i class="fa fa-list"></i><span>Animal Groups Category</span></a></li>
-                <li class="{{classActivePath('sports')}}"><a href="{{ URL::to('admin/earthling') }}" class="{{classActivePath('sports')}}"><i class="fa fa-soccer-ball-o"></i><span>Animal Groups Video</span></a></li>
+                <li class="{{classActivePath('earthling')}}"><a href="{{ URL::to('admin/earthling') }}" class="{{classActivePath('earthling')}}"><i class="fa fa-soccer-ball-o"></i><span>Animal Groups Video</span></a></li>
                </ul>
             </li>
             @endif
@@ -143,8 +143,8 @@
             <li class="has_sub"> 
               <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-futbol-o"></i><span>{{trans('words.earthling_text')}}</span><span class="menu-arrow"></span></a>
               <ul class="list-unstyled">                 
-                <li class="{{classActivePath('sports_category')}}"><a href="{{ URL::to('admin/sports_category') }}" class="{{classActivePath('sports_category')}}"><i class="fa fa-list"></i><span>{{trans('words.earthling_cat_text')}}</span></a></li>
-                <li class="{{classActivePath('sports')}}"><a href="{{ URL::to('admin/sports') }}" class="{{classActivePath('sports')}}"><i class="fa fa-soccer-ball-o"></i><span>{{trans('words.earthling_video_text')}}</span></a></li>
+                <li class="{{classActivePath('earthling_category')}}"><a href="{{ URL::to('admin/earthling_category') }}" class="{{classActivePath('earthling_category')}}"><i class="fa fa-list"></i><span>{{trans('words.earthling_cat_text')}}</span></a></li>
+                <li class="{{classActivePath('earthling')}}"><a href="{{ URL::to('admin/earthling') }}" class="{{classActivePath('earthling')}}"><i class="fa fa-soccer-ball-o"></i><span>{{trans('words.earthling_video_text')}}</span></a></li>
                </ul>
             </li>
             @endif

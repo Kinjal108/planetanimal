@@ -7,7 +7,7 @@
 @section('content')
   
 @if(count($slider)!=0)
-  @include("pages.sports.slider")  
+  @include("pages.earthling.slider")  
 @endif
 
 <!-- Banner -->
@@ -35,7 +35,7 @@
         <div class="custom_select_filter">
           <select class="selectpicker show-menu-arrow" id="filter_by_lang">
             <option value="">{{trans('words.category')}}</option>
-            @foreach(\App\Models\SportsCategory::where('status','1')->orderBy('id')->get() as $cat_data)
+            @foreach(\App\Models\Earthling_category::where('status','1')->orderBy('id')->get() as $cat_data)
               <option value="{{ URL::to('earthling/?cat_id='.$cat_data->id) }}" @if(isset($_GET['cat_id']) && $_GET['cat_id']==$cat_data->id ) selected @endif>{{stripslashes($cat_data->category_name)}}</option>
             @endforeach
              

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Auth;
 use App\Models\User;
-use App\Models\Sports;
-use App\Models\SportsCategory;
+use App\Models\Earthling;
+use App\Models\Earthling_category;
 use App\Models\RecentlyWatched;
 
 use App\Http\Requests;
@@ -15,7 +15,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 
 
-class SportsController extends MainAdminController
+class EarthlingController extends MainAdminController
 {
 	public function __construct()
     {
@@ -25,7 +25,7 @@ class SportsController extends MainAdminController
         check_verify_purchase();	
 		  
     }
-    public function sports_video_list()
+    public function earthling_video_list()
     { 
         if(Auth::User()->usertype!="Admin" AND Auth::User()->usertype!="Sub_Admin")
             {
@@ -38,28 +38,28 @@ class SportsController extends MainAdminController
         
         $page_title=trans('words.earthling_video_text');
         
-        $cat_list = SportsCategory::orderBy('category_name')->get();      
+        $cat_list = Earthling_category::orderBy('category_name')->get();      
 
         if(isset($_GET['s']))
         {
             $keyword = $_GET['s'];  
-            $video_list = Sports::where("video_title", "LIKE","%$keyword%")->orderBy('video_title')->paginate(12);
+            $video_list = Earthling::where("video_title", "LIKE","%$keyword%")->orderBy('video_title')->paginate(12);
 
             $video_list->appends(\Request::only('s'))->links();
         }    
         else if(isset($_GET['cat_id']))
         {
             $cat_id = $_GET['cat_id'];
-            $video_list = Sports::where("sports_cat_id", "=",$cat_id)->orderBy('id','DESC')->paginate(12);
+            $video_list = Earthling::where("sports_cat_id", "=",$cat_id)->orderBy('id','DESC')->paginate(12);
 
             $video_list->appends(\Request::only('cat_id'))->links();
         }
         else
         {
-            $video_list = Sports::orderBy('id','DESC')->paginate(12);
+            $video_list = Earthling::orderBy('id','DESC')->paginate(12);
         } 
          
-        return view('admin.pages.sports.list',compact('page_title','video_list','cat_list'));
+        return view('admin.pages.earthling.list',compact('page_title','video_list','cat_list'));
     }
     
     public function addVideo()    { 
@@ -75,9 +75,9 @@ class SportsController extends MainAdminController
 
         $page_title=trans('words.add_video');
 
-        $cat_list = SportsCategory::orderBy('category_name')->get();   
+        $cat_list = Earthling_category::orderBy('category_name')->get();   
  
-        return view('admin.pages.sports.addedit',compact('page_title','cat_list'));
+        return view('admin.pages.earthling.addedit',compact('page_title','cat_list'));
     }
     
     public function addnew(Request $request)
@@ -109,11 +109,11 @@ class SportsController extends MainAdminController
         
         if(!empty($inputs['id'])){
            
-            $video_obj = Sports::findOrFail($inputs['id']);
+            $video_obj = Earthling::findOrFail($inputs['id']);
 
         }else{
 
-            $video_obj = new Sports;
+            $video_obj = new Earthling;
 
         }
 
@@ -233,10 +233,10 @@ class SportsController extends MainAdminController
 
           $page_title=trans('words.edit_video');
 
-          $cat_list = SportsCategory::orderBy('category_name')->get();
-          $video_info = Sports::findOrFail($sport_id);   
+          $cat_list = Earthling_category::orderBy('category_name')->get();
+          $video_info = Earthling::findOrFail($sport_id);   
 
-          return view('admin.pages.sports.addedit',compact('page_title','video_info','cat_list'));
+          return view('admin.pages.earthling.addedit',compact('page_title','video_info','cat_list'));
         
     }	 
     
@@ -247,7 +247,7 @@ class SportsController extends MainAdminController
        
             $recently = RecentlyWatched::where('video_type','Sports')->where('video_id',$sport_id)->delete(); 	
 
-            $sports = Sports::findOrFail($sport_id);
+            $sports = Earthling::findOrFail($sport_id);
             $sports->delete();
 
             \Session::flash('flash_message', trans('words.deleted'));

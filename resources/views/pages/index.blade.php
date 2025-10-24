@@ -286,13 +286,13 @@
                 <div class="tv-season-video-carousel owl-carousel">
                   @foreach(explode(",",$sections_data->sport_ids) as $sport_data)
                     <div class="single-video">
-                      <a href="{{ URL::to('earthling/details/'.App\Models\Sports::getSportsInfo($sport_data,'video_slug').'/'.$sport_data) }}" title="{{App\Models\Sports::getSportsInfo($sport_data,'video_title')}}">
+                      <a href="{{ URL::to('earthling/details/'.App\Models\Earthling::getSportsInfo($sport_data,'video_slug').'/'.$sport_data) }}" title="{{App\Models\Earthling::getSportsInfo($sport_data,'video_title')}}">
                          <div class="video-img">       
-                            @if(App\Models\Sports::getSportsInfo($sport_data,'video_access')=="Paid")
+                            @if(App\Models\Earthling::getSportsInfo($sport_data,'video_access')=="Paid")
                             <div class="vid-lab-premium"><img src="{{ URL::asset('public/site_assets/images/ic-premium.png') }}" alt="ic-premium" title="Sports-ic-premium"></div> 
                             @endif   
-                          <span class="video-item-content">{{App\Models\Sports::getSportsInfo($sport_data,'video_title')}}</span>
-                          <img src="{{URL::to('public/'.App\Models\Sports::getSportsInfo($sport_data,'video_image'))}}" alt="{{App\Models\Sports::getSportsInfo($sport_data,'video_title')}}" title="Sports-{{App\Models\Sports::getSportsInfo($sport_data,'video_title')}}" />         
+                          <span class="video-item-content">{{App\Models\Earthling::getSportsInfo($sport_data,'video_title')}}</span>
+                          <img src="{{URL::to('public/'.App\Models\Earthling::getSportsInfo($sport_data,'video_image'))}}" alt="{{App\Models\Earthling::getSportsInfo($sport_data,'video_title')}}" title="Sports-{{App\Models\Earthling::getSportsInfo($sport_data,'video_title')}}" />         
                          </div>                          
                       </a>
                     </div>

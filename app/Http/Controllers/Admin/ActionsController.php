@@ -11,8 +11,8 @@ use App\Models\Movies;
 use App\Models\Series;
 use App\Models\Season; 
 use App\Models\Episodes; 
-use App\Models\Sports;
-use App\Models\SportsCategory;
+use App\Models\Earthling;
+use App\Models\Earthling_category;
 use App\Models\LiveTV;
 use App\Models\TvCategory;
 use App\Models\Slider;
@@ -236,7 +236,7 @@ class ActionsController extends MainAdminController
         else if($action_for=="sports_status")
         {
 
-            $data_obj = Sports::findOrFail($post_id);        
+            $data_obj = Earthling::findOrFail($post_id);        
      
             if($value=="true")
             {
@@ -289,7 +289,7 @@ class ActionsController extends MainAdminController
         else if($action_for=="sports_cat_status")
         {
 
-            $data_obj = SportsCategory::findOrFail($post_id);        
+            $data_obj = Earthling_category::findOrFail($post_id);        
      
             if($value=="true")
             {
@@ -790,7 +790,7 @@ class ActionsController extends MainAdminController
         }
         else if($action_for=="sports_cat_delete")
         {
-            $data_obj = SportsCategory::findOrFail($post_id);
+            $data_obj = Earthling_category::findOrFail($post_id);
             $data_obj->delete(); 
              
             $response['status'] = 1;            
@@ -801,7 +801,7 @@ class ActionsController extends MainAdminController
 
             $watchlist_obj = Watchlist::where('post_type','Sports')->where('post_id',$post_id)->delete();
 
-            $data_obj = Sports::findOrFail($post_id);
+            $data_obj = Earthling::findOrFail($post_id);
             $data_obj->delete(); 
 
             //Remove from Home Section
@@ -848,7 +848,7 @@ class ActionsController extends MainAdminController
 
                 $watchlist_obj = Watchlist::where('post_type','Sports')->where('post_id',$pid)->delete();
                 
-                $data_obj = Sports::findOrFail($pid);
+                $data_obj = Earthling::findOrFail($pid);
                 $data_obj->delete();
 
                 //Remove from Home Section
